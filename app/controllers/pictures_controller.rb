@@ -1,7 +1,10 @@
 class PicturesController < ApplicationController
   def index
-    # @pictures = Picture.all
+    @pictures = Picture.all
     @most_recent_pictures = Picture.most_recent_five
+    @created_before_time = Picture.created_before(Time.now - 60*60*24*90)
+    @pictures_year = Picture.pictures_created_in_year(Time.now - 60*60*24*365)
+    @pictures_before_year = Picture.pictures_created_before_year(Time.now - 60*60*24*365)
   end
 
   def show
@@ -38,7 +41,7 @@ class PicturesController < ApplicationController
     @picture.title = params[:picture][:title]
     @picture.artist = params[:picture][:artist]
     @picture.url = params[:picture][:url]
-
+    @picture.created_at = params[:picture][:created_at]
 
     if @picture.save
       redirect_to "/pictures/#{@picture.id}"

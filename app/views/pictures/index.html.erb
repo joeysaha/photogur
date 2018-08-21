@@ -1,9 +1,12 @@
 <h1>Pictures (<%= @pictures.length %>)</h1>
 <%= link_to("New Picture", "/pictures/new") %>
 
+
 <% @pictures.each do |picture| %>
-  <p><%= picture.title %>, <%= picture.artist %></p>
+  <p>Title: <b><%= picture.title %></b>, <br>Artist: <b><%= picture.artist %></b></p>
   <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+  <%= picture.created_at %> | <%= picture.updated_at %>
+  Posted <%= ((Time.now - picture.created_at)/(60*60*24)).round %> days ago.
 <% end %>
 
 <h1>Most recent pictures</h1>
@@ -12,3 +15,50 @@
     <li><%= picture.title %></li>
   <% end %>
 </ul>
+
+<h1>Pictures older than a month</h1>
+<% @pictures.each do |picture| %>
+  <% if ((Time.now - picture.created_at)/(60*60*24)) > 31 %>
+    <ul>
+        <li><%= picture.title %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<h1>Pictures older than 3 months</h1>
+<% @created_before_time.each do |picture| %>
+  <ul>
+    <li>
+      <%= picture.title %> <br>
+      <!-- <%= picture.created_at %> -->
+    </li>
+  </ul>
+<% end %>
+
+<h1>Pictures created this year (2018)</h1>
+<% @pictures_year.each do |picture| %>
+  <h3>
+    <!-- <%= picture.created_at.year %> -->
+  </h3>
+  <ul>
+    <li>
+      <%= picture.title %>
+    </li>
+  </ul>
+<% end %>
+
+<h1>Pictures created before this year</h1>
+<% @pictures_before_year.each do |picture| %>
+  <h3>
+    <%= picture.created_at.year %>
+  </h3>
+  <ul>
+    <li>
+      <%= picture.title %>
+    </li>
+  </ul>
+<% end %>
+
+<!-- DISCLAIMER: IN ORDER TO SEE THE OLDER PICTURES VARIANCES, 
+YOU MUST GO INTO A PICTURE OR MULTIPLE ONES AND EDIT
+THE CREATED_BY DATE OR YOU WILL SEE NOTHING -->

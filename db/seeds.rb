@@ -5,10 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Picture.destroy_all
+
 Picture.create(
   title:  'The old church on the coast of White sea',
   artist: 'Sergey Ershov',
   url:    'http://bitmakerlabs.s3.amazonaws.com/photogur/house.jpg'
+  created_at: Time.new(2002, 9, 4)
+  updated_at: Time.now - (60*60*24*365)
 )
 
 Picture.create(
