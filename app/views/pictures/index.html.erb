@@ -3,9 +3,9 @@
 
 
 <% @pictures.each do |picture| %>
-  <p>Title: <b><%= picture.title %></b>, <br>Artist: <b><%= picture.artist %></b></p>
-  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
-  <%= picture.created_at %> | <%= picture.updated_at %>
+  <p>Title: <b><%= picture.title %></b> <br>Artist: <b><%= picture.artist %></b></p>
+  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %> <br>
+  <%= picture.created_at %> | <%= picture.updated_at %> <br>
   Posted <%= ((Time.now - picture.created_at)/(60*60*24)).round %> days ago.
 <% end %>
 
@@ -59,6 +59,6 @@
   </ul>
 <% end %>
 
-<!-- DISCLAIMER: IN ORDER TO SEE THE OLDER PICTURES VARIANCES, 
+<!-- DISCLAIMER: IN ORDER TO SEE THE OLDER PICTURES VARIANCES,
 YOU MUST GO INTO A PICTURE OR MULTIPLE ONES AND EDIT
 THE CREATED_BY DATE OR YOU WILL SEE NOTHING -->
